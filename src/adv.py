@@ -1,4 +1,5 @@
 from room import Room
+from player import Player
 
 # Declare all the rooms
 
@@ -39,6 +40,9 @@ room['treasure'].s_to = room['narrow']
 
 # Make a new player object that is currently in the 'outside' room.
 
+player = Player('Dave', room['outside'])
+is_start_of_game = True
+
 # Write a loop that:
 #
 # * Prints the current room name
@@ -49,3 +53,24 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
+
+
+def get_dir_of_travel():
+    global is_start_of_game
+    if is_start_of_game:
+        is_start_of_game = False
+        input("Proceed at your own risk!\n\nHit enter to continue\n\n\n")
+    else:
+        dir = input("[n] North [s] South [e] East [w] West [q] Quit \n\n")
+        return dir
+
+dir = get_dir_of_travel()
+
+while dir != "q":
+    print(player.location)
+    print(player.location.description)
+    print('\n')
+    dir = get_dir_of_travel()
+    if dir != 'q':
+        player.move(f'{dir}_to')
