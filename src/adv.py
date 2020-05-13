@@ -1,5 +1,6 @@
 from room import Room
 from player import Player
+from item import Item
 
 # Declare all the rooms
 
@@ -34,6 +35,7 @@ room['narrow'].w_to = room['foyer']
 room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
 
+# Declare Items
 #
 # Main
 #
@@ -55,8 +57,7 @@ is_start_of_game = True
 # If the user enters "q", quit the game.
 
 
-
-def get_dir_of_travel():
+def input_parser():
     global is_start_of_game
     if is_start_of_game:
         is_start_of_game = False
@@ -65,12 +66,13 @@ def get_dir_of_travel():
         dir = input("[n] North [s] South [e] East [w] West [q] Quit \n\n")
         return dir
 
-dir = get_dir_of_travel()
 
-while dir != "q":
-    print(player.location)
-    print(player.location.description)
+command = input_parser()
+
+while command != "q":
+    print(f'\n{player.curr_room}')
+    print(player.curr_room.description)
     print('\n')
-    dir = get_dir_of_travel()
-    if dir != 'q':
-        player.move(f'{dir}_to')
+    command = input_parser()
+    if command != 'q':
+        player.move(f'{command}_to')
