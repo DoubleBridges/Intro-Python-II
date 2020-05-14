@@ -15,4 +15,4 @@ class Lightsource(Item):
         self.on = on
 
     def __str__(self):
-        super().__str__()
+        return super().__str__()

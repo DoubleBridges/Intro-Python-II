@@ -9,4 +9,7 @@ class Room:
         self.items = items
 
     def __str__(self):
-        return f"{self.name}\n{self.description}"
+        item_list = ""
+        for item in self.items:
+            item_list += item.name + "\n"
+        return f"{self.name}\n{self.description}\nItems:\n{item_list}"

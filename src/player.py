@@ -9,7 +9,7 @@ class Player:
         self.inventory = []
 
     def __str__(self):
-        return f"{self.name}'s location: {self.curr_room}"
+        return f"{self.name}'s location: {self.curr_room.name}\nInventory: {self.inventory}"
 
     def move(self, direction):
         if hasattr(self.curr_room, f"{direction}"):
@@ -18,7 +18,9 @@ class Player:
             print("------- You can't walk through walls, Junior")
 
     def get(self, item):
-        if hasattr(self.curr_room.items, f"{item}"):
+        for item in self.curr_room.items:
+            print(item)
+        if item in self.curr_room.items:
             self.inventory.append(item)
             self.curr_room.items.remove(item)
             print(f"You now have the {item}")

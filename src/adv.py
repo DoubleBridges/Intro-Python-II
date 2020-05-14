@@ -1,7 +1,11 @@
 from room import Room
 from player import Player
-from item import Item
+from item import Lightsource, Item
 import sys
+
+# Declare items
+
+item = {"torch": Lightsource("torch", "length of wood wrapped in oily rags", 10, True)}
 
 # Declare all the rooms
 
@@ -11,7 +15,7 @@ room = {
         "Foyer",
         """Dim light filters in from the south. Dusty
 passages run north and east.""",
-        [],
+        [item["torch"],],
     ),
     "overlook": Room(
         "Grand Overlook",
@@ -47,7 +51,6 @@ room["narrow"].w_to = room["foyer"]
 room["narrow"].n_to = room["treasure"]
 room["treasure"].s_to = room["narrow"]
 
-# Declare Items
 #
 # Main
 #
@@ -85,6 +88,19 @@ while command != "q":
     print(f"\n{player.curr_room}\n")
     command = input_parser()
     if command != "q":
-        player.move(f"{command}_to")
+
+        verb = command.split(" ")[0].strip()
+        noun = command.split(" ")[1].strip()
+
+        if verb == "move":
+            player.move(f"{noun}_to")
+        elif verb == "get" or verb == "take":
+            player.get(noun)
+        elif verb == "drop":
+            player.drop(noun)
+        elif verb == "log" and noun == "state":
+            print(f"Room: {player.curr_room}\nPlayer: {player}")
+        else:
+            continue
     else:
         sys.exit("\n\nThank's for playing\n\n")
