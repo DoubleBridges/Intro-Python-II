@@ -20,7 +20,6 @@ class Player:
     def get(self, item):
         for item in self.curr_room.items:
             if item in self.curr_room.items:
-                print(item)
                 self.inventory.append(item)
                 self.curr_room.items.remove(item)
                 print(f"You now have the {item}")
