@@ -5,17 +5,26 @@ import sys
 
 # Declare items
 
-item = {"torch": Lightsource("torch", "length of wood wrapped in oily rags", 10, True)}
+item = {
+    "torch": Lightsource("torch", "length of wood wrapped in oily rags", 10, True),
+    "flashlight": Lightsource(
+        "flashlight", "cheap dollar store light, batteries are suspect", 5, False
+    ),
+}
 
 # Declare all the rooms
 
 room = {
-    "outside": Room("Outside Cave Entrance", "North of you, the cave mount beckons"),
+    "outside": Room(
+        "Outside Cave Entrance",
+        "North of you, the cave mount beckons",
+        [item["flashlight"], item["torch"],],
+    ),
     "foyer": Room(
         "Foyer",
         """Dim light filters in from the south. Dusty
 passages run north and east.""",
-        [item["torch"],],
+        [],
     ),
     "overlook": Room(
         "Grand Overlook",

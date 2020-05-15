@@ -19,20 +19,21 @@ class Player:
 
     def get(self, item):
         for item in self.curr_room.items:
-            print(item)
-        if item in self.curr_room.items:
-            self.inventory.append(item)
-            self.curr_room.items.remove(item)
-            print(f"You now have the {item}")
-        else:
-            print(f"{item} is not located in this room")
+            if item in self.curr_room.items:
+                print(item)
+                self.inventory.append(item)
+                self.curr_room.items.remove(item)
+                print(f"You now have the {item}")
+            else:
+                print(f"{item} is not located in this room")
 
     def drop(self, item):
-        if item in self.inventory:
-            self.curr_room.items.append(item)
-            self.inventory.remove(item)
-            print(
-                f"{item} dropped in {self.curr_room}, hope you can remember where you left it"
-            )
-        else:
-            print("You gotta have it to lose it")
+        for item in self.inventory:
+            if item in self.inventory:
+                self.curr_room.items.append(item)
+                self.inventory.remove(item)
+                print(
+                    f"{item} dropped in {self.curr_room}, hope you can remember where you left it"
+                )
+            else:
+                print("You gotta have it to lose it")
