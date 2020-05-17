@@ -112,19 +112,19 @@ while True:
 
         player_input = command[0].strip(" ")
 
-        # try:
-        if player_input == "help":
-            print(help_message)
-        elif player_input == "i" or player_input == "inventory":
-            print(player.list_inventory())
-        elif player_input == "look":
-            print(player.curr_room.list_items())
-        elif player_input == "q":
-            break
-        else:
+        try:
+            if player_input == "help":
+                print(help_message)
+            elif player_input == "i" or player_input == "inventory":
+                print(player.list_inventory())
+            elif player_input == "look":
+                print(player.curr_room.list_items())
+            elif player_input == "q":
+                break
+            else:
+                print('Not a recognized commend enter "help" for list of commands')
+        except:
             print('Not a recognized commend enter "help" for list of commands')
-        # except:
-        #     print('Not a recognized commend enter "help" for list of commands')
 
     elif len(command) == 2:
 
