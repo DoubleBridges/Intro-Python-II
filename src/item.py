@@ -16,3 +16,10 @@ class Lightsource(Item):
 
     def __str__(self):
         return super().__str__()
+
+
+class Weapon(Item):
+    def __init__(self, name: str, description: str, attack_value: int):
+        super().__init__(name, description)
+
+        self.attack_value = attack_value

@@ -2,14 +2,17 @@
 # description attributes.
 class Room:
     def __init__(
-        self, name: str, description: str, items: list = [],
+        self, name: str, description: str, items: dict = {},
     ):
         self.name = name
         self.description = description
         self.items = items
 
     def __str__(self):
-        item_list = ""
-        for item in self.items:
-            item_list += item.name + "\n"
-        return f"{self.name}\n{self.description}\nItems:\n{item_list}"
+        return f"{self.name}\n{self.description}\n"
+
+    def list_items(self):
+        room_items = ""
+        for name in self.items:
+            room_items += name + "\n"
+        return "\nItems in the room:\n" + room_items

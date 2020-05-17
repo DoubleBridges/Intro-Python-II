@@ -6,7 +6,7 @@ class Player:
     def __init__(self, name: str, curr_room: object):
         self.name = name
         self.curr_room = curr_room
-        self.inventory = []
+        self.inventory = {}
 
     def __str__(self):
         return f"{self.name}'s location: {self.curr_room.name}\nInventory: {self.inventory}"
@@ -18,22 +18,27 @@ class Player:
             print("------- You can't walk through walls, Junior")
 
     def get(self, item):
-        for item in self.curr_room.items:
-            if item in self.curr_room.items:
-                print(item)
-                self.inventory.append(item)
-                self.curr_room.items.remove(item)
-                print(f"You now have the {item}")
-            else:
-                print(f"{item} is not located in this room")
+        items = self.curr_room.items
+        inventory = self.inventory
+        try:
+            inventory[item] = items[item]
+            del items[item]
+            print(f"You now have the {item}")
+        except:
+            print(f"{item} is not located in this room")
 
     def drop(self, item):
-        for item in self.inventory:
-            if item in self.inventory:
-                self.curr_room.items.append(item)
-                self.inventory.remove(item)
-                print(
-                    f"{item} dropped in {self.curr_room}, hope you can remember where you left it"
-                )
-            else:
-                print("You gotta have it to lose it")
+        inventory = self.inventory
+        items = self.curr_room.items
+        try:
+            items[item] = inventory[item]
+            del inventory[item]
+            print(f"You have dropped the {item}, hope you can find it again")
+        except:
+            print("You gotta have it to lose it")
+
+    def list_inventory(self):
+        inventory_items = ""
+        for name in self.inventory:
+            inventory_items += name + "\n"
+        return "\nItems in your bag:\n" + inventory_items
